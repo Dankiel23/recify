@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(npm install:*)",
+      "Bash(npx next build:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd Spotify recommendations app with OAuth PKCE\n\nFull Next.js 14 app with Tailwind CSS that lets users log in via Spotify,\npaste a track link, and get 20 recommended tracks with album art, artist\ninfo, preview playback, and \"Open in Spotify\" links.\n\n- OAuth Authorization Code with PKCE flow \\(login/callback API routes\\)\n- Access tokens stored in secure HTTP-only cookies\n- Server-side Spotify API calls via /api/recommendations\n- Track ID parsing for URLs, URIs, and raw IDs \\(with zod validation\\)\n- Responsive dark-themed UI with loading/error states\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(test:*)",
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd demo mode for testing without Spotify credentials\n\nWhen DEMO_MODE=true is set in .env, the app bypasses real Spotify OAuth\nand API calls, using mock data instead. All three API routes check for\ndemo mode and short-circuit with fake tokens and sample track data.\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(start:*)"
+    ]
+  }
+}
