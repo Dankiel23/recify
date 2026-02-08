@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { exchangeCodeForTokens } from "@/lib/spotify";
 import { setTokenCookie, clearVerifierCookie } from "@/lib/cookies";
+import { DEMO_MODE } from "@/lib/demo";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -18,6 +19,15 @@ export async function GET(req: NextRequest) {
 
   if (!code) {
     return NextResponse.redirect(`${appUrl}?error=missing_code`);
+  }
+
+  // In demo mode, skip token exchange and set a fake token
+  if (DEMO_MODE) {
+    const res = NextResponse.redirect(`${appUrl}/discover`);
+    setTokenCookie(res, "demo_access_token", 3600);
+    clearVerifierCookie(res);
+    res.cookies.delete("sp_oauth_state");
+    return res;
   }
 
   // Validate state

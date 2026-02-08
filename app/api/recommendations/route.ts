@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getRecommendations } from "@/lib/spotify";
 import { parseTrackId } from "@/lib/parseSpotify";
+import { DEMO_MODE, getMockRecommendations } from "@/lib/demo";
 
 export async function GET(req: NextRequest) {
   const accessToken = req.cookies.get("sp_access_token")?.value;
@@ -25,6 +26,11 @@ export async function GET(req: NextRequest) {
       { error: "Invalid Spotify track link or ID" },
       { status: 400 }
     );
+  }
+
+  // In demo mode, return mock data
+  if (DEMO_MODE) {
+    return NextResponse.json({ tracks: getMockRecommendations() });
   }
 
   try {
